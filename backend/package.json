@@ -17,14 +17,17 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
+    "@fastify/cors": "^8.3.0",
     "@fastify/jwt": "^7.2.0",
     "@fastify/multipart": "^7.7.1",
     "@fastify/static": "^6.10.2",
     "@prisma/client": "^5.0.0",
     "@types/bcrypt": "^5.0.0",
+    "@types/joi": "^17.2.3",
     "bcrypt": "^5.1.0",
     "dotenv": "^16.3.1",
     "fastify": "^4.20.0",
+    "joi": "^17.9.2",
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0"

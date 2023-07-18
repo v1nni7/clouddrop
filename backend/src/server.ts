@@ -2,11 +2,13 @@ import 'dotenv/config'
 
 import fastify from 'fastify'
 import jwt from '@fastify/jwt'
+import cors from '@fastify/cors'
 import multipart from '@fastify/multipart'
 import staticFastify from '@fastify/static'
 import { resolve } from 'node:path'
 
 import { authRoutes } from './routes/authRoutes'
+import { uploadRoutes } from './routes/uploadRoutes'
 
 const app = fastify()
 
@@ -19,11 +21,16 @@ app.register(staticFastify, {
 
 const secret: string = process.env.JWT_SECRET || ''
 
+app.register(cors, {
+  origin: true,
+})
+
 app.register(jwt, {
   secret,
 })
 
 app.register(authRoutes)
+app.register(uploadRoutes)
 
 app
   .listen({
