@@ -1,6 +1,7 @@
 import 'dotenv/config'
 
 import fastify from 'fastify'
+import jwt from '@fastify/jwt'
 import multipart from '@fastify/multipart'
 import staticFastify from '@fastify/static'
 import { resolve } from 'node:path'
@@ -16,6 +17,12 @@ app.register(staticFastify, {
   prefix: '/uploads',
 })
 
+const secret: string = process.env.JWT_SECRET || ''
+
+app.register(jwt, {
+  secret,
+})
+
 app.register(authRoutes)
 
 app
@@ -26,3 +33,5 @@ app
   .then(() => {
     console.log('🚀 HTTP server running on http://localhost:3333')
   })
+
+export default app
