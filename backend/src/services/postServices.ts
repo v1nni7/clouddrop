@@ -17,6 +17,21 @@ async function getPostsByUserId(userId: string) {
   return posts
 }
 
+async function getPostById(postId: string) {
+  const post = await validatePostExistsOrFail(postId)
+  return post
+}
+
+async function validatePostExistsOrFail(postId: string) {
+  const post = await postRepository.findByPostId(postId)
+
+  if (!post) {
+    throw errorResponse(400, 'Post not found')
+  }
+
+  return post
+}
+
 async function validateUploadExistsOrFail(fileURL: string) {
   const filename = path.basename(fileURL)
 
@@ -32,4 +47,5 @@ async function validateUploadExistsOrFail(fileURL: string) {
 export default {
   createPost,
   getPostsByUserId,
+  getPostById,
 }

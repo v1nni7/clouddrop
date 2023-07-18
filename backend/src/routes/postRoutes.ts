@@ -7,4 +7,5 @@ export default async function postRoutes(app: FastifyInstance) {
 
   app.post('/post', postController.createPost)
   app.get('/post', postController.getPostsByUserId)
+  app.get('/post/:postId', postController.getPostById)
 }

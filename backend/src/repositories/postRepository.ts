@@ -11,7 +11,12 @@ function findByUserId(userId: string) {
   return prisma.post.findMany({ where: { userId } })
 }
 
+function findByPostId(postId: string) {
+  return prisma.post.findUnique({ where: { id: postId } })
+}
+
 export default {
   createPost,
   findByUserId,
+  findByPostId,
 }
