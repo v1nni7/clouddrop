@@ -9,6 +9,7 @@ import { resolve } from 'node:path'
 
 import { authRoutes } from './routes/authRoutes'
 import { uploadRoutes } from './routes/uploadRoutes'
+import postRoutes from './routes/postRoutes'
 
 const app = fastify()
 
@@ -30,6 +31,7 @@ app.register(jwt, {
 })
 
 app.register(authRoutes)
+app.register(postRoutes)
 app.register(uploadRoutes)
 
 app
