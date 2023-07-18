@@ -6,4 +6,5 @@ export default async function postRoutes(app: FastifyInstance) {
   app.addHook('preHandler', validateTokenMiddleware)
 
   app.post('/post', postController.createPost)
+  app.get('/post', postController.getPostsByUserId)
 }

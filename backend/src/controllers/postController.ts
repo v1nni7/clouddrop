@@ -16,6 +16,23 @@ async function createPost(request: FastifyRequest, reply: FastifyReply) {
   }
 }
 
+async function getPostsByUserId(request: FastifyRequest, reply: FastifyReply) {
+  try {
+    const { userId } = request.body as any
+
+    const posts = await postServices.getPostsByUserId(userId)
+
+    reply.code(200).send(posts)
+  } catch (error: any) {
+    if (error.message) {
+      reply.code(error.code).send(error.message)
+    }
+
+    reply.code(500).send('Internal server error')
+  }
+}
+
 export default {
   createPost,
+  getPostsByUserId,
 }

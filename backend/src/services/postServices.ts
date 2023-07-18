@@ -11,6 +11,12 @@ async function createPost(data: CreatePostParams) {
   await postRepository.createPost(data)
 }
 
+async function getPostsByUserId(userId: string) {
+  const posts = await postRepository.findByUserId(userId)
+
+  return posts
+}
+
 async function validateUploadExistsOrFail(fileURL: string) {
   const filename = path.basename(fileURL)
 
@@ -25,4 +31,5 @@ async function validateUploadExistsOrFail(fileURL: string) {
 
 export default {
   createPost,
+  getPostsByUserId,
 }
