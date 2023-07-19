@@ -48,7 +48,7 @@ async function validateEmailExistsOrFail(email: string) {
   const user = await userRepository.findByEmail(email)
 
   if (!user) {
-    throw errorResponse(401, 'Email or password incorrect')
+    throw errorResponse(401, 'Email ou senha incorreto')
   }
 
   return user
@@ -61,17 +61,15 @@ async function validatePasswordMatchOrFail(
   const match = compareSync(password, hashedPassword)
 
   if (!match) {
-    throw errorResponse(401, 'Email or password incorrect')
+    throw errorResponse(401, 'Email ou senha incorreto')
   }
 }
 
 async function validateEmailAvailability(email: string) {
   const user = await userRepository.findByEmail(email)
 
-  console.log(user)
-
   if (user) {
-    throw errorResponse(409, 'Email already exists')
+    throw errorResponse(409, 'Email já cadastrado')
   }
 }
 
@@ -79,7 +77,7 @@ async function validateUsernameAvailability(username: string) {
   const user = await userRepository.findByUsername(username)
 
   if (user) {
-    throw errorResponse(409, 'Username already exists')
+    throw errorResponse(409, 'Usuário já cadastrado')
   }
 }
 

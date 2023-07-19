@@ -4,9 +4,9 @@ import { CreateUserParams } from '@/repositories/userRepository'
 
 async function createUser(request: FastifyRequest, reply: FastifyReply) {
   try {
-    const body = request.body as CreateUserParams
+    const { email, password, username, name } = request.body as CreateUserParams
 
-    await authServices.createUser(body)
+    await authServices.createUser({ email, password, username, name })
 
     reply.code(201)
   } catch (error: any) {
