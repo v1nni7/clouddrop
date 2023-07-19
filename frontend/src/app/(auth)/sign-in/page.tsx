@@ -1,5 +1,6 @@
 'use client'
 
+import { signInRequest } from '@/services/auth'
 import Link from 'next/link'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
@@ -12,7 +13,13 @@ export default function SignIn() {
   const { handleSubmit, register } = useForm<FieldValues>()
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data)
+    try {
+      const response = await signInRequest(data)
+
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
