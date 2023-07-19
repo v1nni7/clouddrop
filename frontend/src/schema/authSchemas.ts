@@ -18,3 +18,10 @@ export const signUpSchema = object().shape({
   username: string().required('Insira seu usuário'),
   name: string().required('Insira seu nome'),
 })
+
+export const signInSchema = object().shape({
+  password: string().required('Insira sua senha'),
+  email: string()
+    .required('Insira seu e-mail')
+    .email('Insira um e-mail válido'),
+})

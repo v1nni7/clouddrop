@@ -10,6 +10,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: 'var(--font-poppins)',
+        alt: 'var(--font-lexend-deca)',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

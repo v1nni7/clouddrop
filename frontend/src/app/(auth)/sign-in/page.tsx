@@ -1,8 +1,15 @@
 'use client'
 
-import { signInRequest } from '@/services/auth'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { AxiosError } from 'axios'
+import { toast } from 'react-toastify'
+import { setCookie } from 'nookies'
 import { SubmitHandler, useForm } from 'react-hook-form'
+
+import { signInRequest } from '@/services/auth'
+import LoadingSpinner from '@/components/LoadingSpinner'
+import { signInSchema } from '@/schema/authSchemas'
 
 type FieldValues = {
   email: string
@@ -10,15 +17,32 @@ type FieldValues = {
 }
 
 export default function SignIn() {
-  const { handleSubmit, register } = useForm<FieldValues>()
+  const router = useRouter()
+  const { handleSubmit, register, formState } = useForm<FieldValues>()
+  const { isSubmitting } = formState
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
+      await signInSchema.validate(data, { abortEarly: true })
+
       const response = await signInRequest(data)
 
-      console.log(response)
-    } catch (error) {
-      console.log(error)
+      if (response.status !== 200) {
+        throw new Error('Erro ao entrar')
+      }
+
+      setCookie(null, 'clouddrop.token', response.data.token, {
+        maxAge: 60 * 60 * 24 * 7, // 7 days
+      })
+
+      toast.success('Login efetuado com sucesso!')
+      router.push('/')
+    } catch (error: any) {
+      if (error instanceof AxiosError) {
+        return toast.error(`${error.response?.data}`)
+      }
+
+      toast.error(`${error.message}`)
     }
   }
 
@@ -45,8 +69,16 @@ export default function SignIn() {
               className="h-12 w-full rounded-lg border border-zinc-200 bg-zinc-100/80 p-2 outline-none transition-colors focus:border-zinc-400"
             />
           </div>
-          <button className="m-2 rounded-lg bg-blue-500 p-3 font-bold text-zinc-50 transition-colors hover:bg-blue-500/80 focus:hover:bg-blue-500/80">
-            Entrar
+          <button
+            type="submit"
+            className="m-2 h-14 rounded-lg bg-blue-500 font-bold text-zinc-50 transition-colors hover:bg-blue-500/80 focus:hover:bg-blue-500/80 disabled:bg-blue-600/50"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <LoadingSpinner width={35} height={35} strokeWidth={3} />
+            ) : (
+              'Cadastrar'
+            )}
           </button>
           <Link
             href="/sign-up"

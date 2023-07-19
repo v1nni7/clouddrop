@@ -107,6 +107,7 @@ export default function SignUp() {
             </div>
           </div>
           <button
+            type="submit"
             className="m-2 h-14 rounded-lg bg-blue-500 font-bold text-zinc-50 transition-colors hover:bg-blue-500/80 focus:hover:bg-blue-500/80 disabled:bg-blue-600/50"
             disabled={isSubmitting}
           >
