@@ -1,7 +1,14 @@
 'use client'
 
 import Link from 'next/link'
+import { AxiosError } from 'axios'
+import { toast } from 'react-toastify'
+import { useRouter } from 'next/navigation'
 import { SubmitHandler, useForm } from 'react-hook-form'
+
+import { signUpSchema } from '@/schema/authSchemas'
+import { signUpRequest } from '@/services/auth'
+import LoadingSpinner from '@/components/LoadingSpinner'
 
 type FieldValues = {
   email: string
@@ -13,12 +20,29 @@ type FieldValues = {
 }
 
 export default function SignUp() {
-  const { handleSubmit, register } = useForm<FieldValues>()
+  const router = useRouter()
+  const { handleSubmit, register, formState } = useForm<FieldValues>()
+  const { isSubmitting } = formState
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
-      console.log(data)
-    } catch (error) {}
+      await signUpSchema.validate(data, { abortEarly: true })
+
+      const response = await signUpRequest(data)
+
+      if (response.status !== 201) {
+        throw new Error('Erro ao criar conta')
+      }
+
+      toast.success('Conta criada com sucesso!')
+      router.push('/sign-in')
+    } catch (error: any) {
+      if (error instanceof AxiosError) {
+        return toast.error(`${error.response?.data}`)
+      }
+
+      toast.error(`${error.message}`)
+    }
   }
 
   return (
@@ -82,8 +106,15 @@ export default function SignUp() {
               />
             </div>
           </div>
-          <button className="m-2 rounded-lg bg-blue-500 p-3 font-bold text-zinc-50 transition-colors hover:bg-blue-500/80 focus:hover:bg-blue-500/80">
-            Cadastrar
+          <button
+            className="m-2 h-14 rounded-lg bg-blue-500 font-bold text-zinc-50 transition-colors hover:bg-blue-500/80 focus:hover:bg-blue-500/80 disabled:bg-blue-600/50"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <LoadingSpinner width={35} height={35} strokeWidth={3} />
+            ) : (
+              'Cadastrar'
+            )}
           </button>
           <Link
             href="/sign-in"

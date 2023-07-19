@@ -1,6 +1,9 @@
 import './globals.css'
+import 'react-toastify/dist/ReactToastify.css'
+
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
+import { ToastContainer } from 'react-toastify'
 
 const poppins = Poppins({
   weight: '400',
@@ -20,7 +23,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="">
-      <body className={`font-sans ${poppins.variable}`}>{children}</body>
+      <body className={`font-sans ${poppins.variable}`}>
+        {children}
+        <ToastContainer position="bottom-center" />
+      </body>
     </html>
   )
 }
