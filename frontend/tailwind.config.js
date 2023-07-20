@@ -8,6 +8,40 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      keyframes: {
+        'fade-in-down': {
+          '0%': {
+            opacity: '0',
+            transform: 'translateY(-60px)',
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'translateY(0)',
+          },
+        },
+      },
+      animation: {
+        'fade-in-down': 'fade-in-down 0.5s ease-out',
+      },
+      columns: {
+        count: {
+          'column-count': '5',
+        },
+      },
+      aspectRatio: {
+        'w-1': {
+          '--tw-aspect-w': '1',
+        },
+        'w-16': {
+          '--tw-aspect-w': '16',
+        },
+        'h-1': {
+          'aspect-h-1': '1',
+        },
+        'h-9': {
+          '--tw-aspect-h': '9',
+        },
+      },
       fontFamily: {
         sans: 'var(--font-poppins)',
         alt: 'var(--font-lexend-deca)',

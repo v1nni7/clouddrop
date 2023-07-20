@@ -5,8 +5,6 @@ import type { Metadata } from 'next'
 import { Poppins, Lexend_Deca as LexendDeca } from 'next/font/google'
 import { ToastContainer } from 'react-toastify'
 
-import Navbar from '@/components/Navbar'
-
 const poppins = Poppins({
   weight: '400',
   subsets: ['latin'],

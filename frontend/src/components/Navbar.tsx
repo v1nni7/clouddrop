@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import decoded from 'jwt-decode'
 import { cookies } from 'next/headers'
-import Dropdown from './Dropdown'
 
 type User = {
   username: string
@@ -16,27 +15,21 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="flex items-center justify-between border-b border-zinc-300 bg-zinc-200 px-6 py-4">
+    <nav className="flex items-center justify-between border-b border-zinc-300 bg-zinc-200/50 p-6">
       <h1 className="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text fill-transparent font-alt text-3xl font-extrabold text-transparent">
         Cloud Drop
       </h1>
 
-      <div className="flex items-center gap-4">
-        <Link
-          href="/"
-          className="font-bold text-zinc-500 transition-colors hover:text-zinc-500/80"
-        >
-          Inicio
-        </Link>
-        <Link
-          href="/"
-          className="font-bold text-zinc-500 transition-colors hover:text-zinc-500/80"
-        >
-          Meus arquivos
-        </Link>
-      </div>
+      <h2 className="w-[480px] text-center">
+        Olá <b>{user?.username}</b>, seja bem-vindo ao <b>Cloud Drop</b>!
+      </h2>
 
-      <Dropdown user={user} />
+      <Link
+        href="/profile"
+        className="flex h-12 items-center rounded-lg bg-blue-300/50 px-12 font-semibold shadow outline-none transition-all hover:bg-blue-400/50 focus:hover:bg-blue-400/50 active:shadow-none"
+      >
+        Meu Perfil
+      </Link>
     </nav>
   )
 }
