@@ -1,3 +1,4 @@
+import Posts from '@/components/Posts'
 import Navbar from '@/components/Navbar'
 import FormUpload from '@/components/FormUpload'
 
@@ -11,11 +12,7 @@ export default function Home() {
           <FormUpload />
         </div>
 
-        <div className="grid w-full grid-cols-3 gap-4">
-          <div className="h-48 w-full rounded-lg bg-zinc-300 p-4">
-            <div className=""></div>
-          </div>
-        </div>
+        <Posts />
       </main>
     </>
   )
