@@ -77,7 +77,7 @@ export default function SignIn() {
             {isSubmitting ? (
               <LoadingSpinner width={35} height={35} strokeWidth={3} />
             ) : (
-              'Cadastrar'
+              'Entrar'
             )}
           </button>
           <Link

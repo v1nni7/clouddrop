@@ -13,3 +13,7 @@ export function createPostRequest(data: PostRequest) {
 export function getPostsRequest() {
   return api.get('/post')
 }
+
+export function getPostRequest(postId: string) {
+  return api.get(`/post/${postId}`)
+}

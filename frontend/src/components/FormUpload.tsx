@@ -18,15 +18,8 @@ type FieldValues = {
 
 export default function FormUpload() {
   const [isOpen, toggleOpen, elementRef] = useToggle()
-  const {
-    handleSubmit,
-    register,
-    watch,
-    reset,
-    formState,
-    setValue,
-    resetField,
-  } = useForm<FieldValues>()
+  const { handleSubmit, register, watch, formState, setValue, resetField } =
+    useForm<FieldValues>()
   const { isSubmitting } = formState
 
   const selectedFile = watch('file') ? watch('file') : []
@@ -97,7 +90,7 @@ export default function FormUpload() {
       </button>
 
       <div
-        className={`fixed left-0 top-0 z-10 h-full w-full transition-all duration-500 ${
+        className={`fixed left-0 top-0 z-10 h-full w-full transition-all ${
           isOpen ? 'visible duration-500' : 'invisible duration-300'
         }`}
       >

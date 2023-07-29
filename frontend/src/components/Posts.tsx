@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 import { getPostsRequest } from '@/services/post'
 import { PostsContext } from '@/context/PostsContext'
 import { IoPlay } from 'react-icons/io5'
+import Link from 'next/link'
 
 export default function Posts() {
   const { posts, setPosts } = useContext(PostsContext)
@@ -44,15 +45,17 @@ export default function Posts() {
               className="group relative overflow-hidden rounded-lg border-2 border-zinc-400"
             >
               {post.type.includes('image') ? (
-                <Image
-                  width={1024}
-                  height={1024}
-                  alt={post.title}
-                  src={post.fileURL}
-                  className="aspect-auto w-full"
-                />
+                <Link href={`/photo/${post.id}`}>
+                  <Image
+                    width={1024}
+                    height={1024}
+                    alt={post.title}
+                    src={post.fileURL}
+                    className="aspect-auto w-full"
+                  />
+                </Link>
               ) : (
-                <>
+                <Link href={`/video/${post.id}`}>
                   <video
                     key={index}
                     src={post.fileURL}
@@ -60,10 +63,10 @@ export default function Posts() {
                     className="aspect-video w-full"
                   />
 
-                  <button className="absolute left-0 top-0 flex h-full w-full items-center justify-center rounded-lg bg-zinc-950/40 text-white transition-colors group-hover:bg-zinc-800/20 group-hover:text-zinc-100/40">
+                  <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center rounded-lg bg-zinc-950/40 text-white transition-colors group-hover:bg-zinc-800/20 group-hover:text-zinc-100/40">
                     <IoPlay className="text-7xl" />
-                  </button>
-                </>
+                  </div>
+                </Link>
               )}
             </div>
           ))}
