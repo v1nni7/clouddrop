@@ -4,6 +4,8 @@ import { Post } from '@prisma/client'
 export type CreatePostParams = Omit<Post, 'id' | 'createdAt' | 'updatedAt'>
 
 function createPost(data: CreatePostParams) {
+  console.log(data)
+
   return prisma.post.create({ data })
 }
 

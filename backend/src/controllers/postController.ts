@@ -7,8 +7,11 @@ async function createPost(request: FastifyRequest, reply: FastifyReply) {
     const body = request.body as CreatePostParams
 
     await postServices.createPost(body)
+
+    reply.code(201)
   } catch (error: any) {
     if (error.message) {
+      console.log(error)
       reply.code(error.code).send(error.message)
     }
 

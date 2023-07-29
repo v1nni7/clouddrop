@@ -27,7 +27,7 @@ async function signInUser(data: SignInParams) {
   const token = await generateToken(
     {
       id: user.id,
-      username: user.name,
+      username: user.username,
     },
     {
       sub: user.id,

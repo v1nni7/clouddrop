@@ -33,6 +33,8 @@ async function validatePostExistsOrFail(postId: string) {
 }
 
 async function validateUploadExistsOrFail(fileURL: string) {
+  console.log(fileURL)
+
   const filename = path.basename(fileURL)
 
   const uploadPath = path.join(__dirname, '../../uploads', filename)

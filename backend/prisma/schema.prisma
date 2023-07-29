@@ -26,6 +26,8 @@ model User {
 model Post {
   id        String   @id @default(uuid())
   fileURL   String
+  title     String
+  type      String
   userId    String
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
