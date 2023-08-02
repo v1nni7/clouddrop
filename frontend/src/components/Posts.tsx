@@ -4,11 +4,10 @@ import Image from 'next/image'
 import { AxiosError } from 'axios'
 import { useContext, useEffect } from 'react'
 import { toast } from 'react-toastify'
+import { IoEyeOutline, IoHeartOutline } from 'react-icons/io5'
 
 import { getPostsRequest } from '@/services/post'
 import { PostsContext } from '@/context/PostsContext'
-import { IoEyeOutline, IoHeartOutline, IoPlay } from 'react-icons/io5'
-import Link from 'next/link'
 
 export default function Posts() {
   const { posts, setPosts } = useContext(PostsContext)
