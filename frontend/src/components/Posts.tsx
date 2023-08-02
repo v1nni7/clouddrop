@@ -38,9 +38,7 @@ export default function Posts() {
   return (
     <>
       <div className="relative w-full">
-        <div
-          /* className="grid gap-4 py-6 sm:grid-cols-2 md:grid-cols-3" */ className="columns-2xs gap-4 space-y-4"
-        >
+        <div className="columns-2xs gap-4 space-y-4 py-16">
           {posts.map((post, index) => {
             return (
               <div

@@ -1,29 +1,40 @@
 import Link from 'next/link'
-import decoded from 'jwt-decode'
-import { cookies } from 'next/headers'
-import { IoSearchSharp } from 'react-icons/io5'
-
-type User = {
-  username: string
-}
+import {
+  IoAddOutline,
+  IoCompassOutline,
+  IoFolderOutline,
+  IoHome,
+  IoHomeOutline,
+  IoPersonOutline,
+} from 'react-icons/io5'
 
 export default function Navbar() {
-  let user: User | null = null
-  const token = cookies().get('clouddrop.token')?.value
-
-  if (token) {
-    user = decoded(token)
-  }
-
   return (
-    <nav className="flex items-center justify-between p-4">
-      <h1 className="bg-gradient-to-r from-indigo-400 to-indigo-500 bg-clip-text text-2xl font-bold text-transparent">
-        CloudDrop
-      </h1>
+    <>
+      <nav className="fixed bottom-0 left-0 flex w-full justify-center p-2">
+        <div className="h-16 w-full rounded-full bg-neutral-700 px-4 shadow shadow-neutral-700 sm:max-w-lg">
+          <div className="grid h-full grid-cols-5 place-items-center text-2xl text-white">
+            <Link
+              href="/timeline"
+              className="flex h-full w-1/2 items-center justify-center border-t-4 border-indigo-500"
+            >
+              {/* <IoHomeOutline /> */}
 
-      <button className="rounded-full bg-neutral-800 p-2">
-        <IoSearchSharp className="text-2xl text-neutral-300" />
-      </button>
-    </nav>
+              <IoHome className="text-indigo-500" />
+            </Link>
+
+            <IoCompassOutline />
+
+            <button className="-translate-y-5 rounded-full bg-indigo-500 p-4 shadow shadow-indigo-500 transition-colors hover:bg-indigo-600 hover:shadow-indigo-600">
+              <IoAddOutline className="text-2xl" />
+            </button>
+
+            <IoFolderOutline />
+
+            <IoPersonOutline />
+          </div>
+        </div>
+      </nav>
+    </>
   )
 }
