@@ -1,5 +1,5 @@
-import authController from '@/controllers/authController'
 import { FastifyInstance } from 'fastify'
+import authController from '@/controllers/authController'
 
 export async function authRoutes(app: FastifyInstance) {
   app.post('/register', authController.createUser)
