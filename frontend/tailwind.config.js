@@ -47,6 +47,7 @@ module.exports = {
         alt: 'var(--font-lexend-deca)',
       },
       backgroundImage: {
+        'hero-section': "url('../assets/images/top-view.jpg')",
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',

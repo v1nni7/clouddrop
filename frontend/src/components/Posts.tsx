@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 
 import { getPostsRequest } from '@/services/post'
 import { PostsContext } from '@/context/PostsContext'
-import { IoPlay } from 'react-icons/io5'
+import { IoEyeOutline, IoHeartOutline, IoPlay } from 'react-icons/io5'
 import Link from 'next/link'
 
 export default function Posts() {
@@ -36,48 +36,45 @@ export default function Posts() {
   }, [handleLoadingPosts])
 
   return (
-    <div className="relative w-full">
-      {posts.length > 0 ? (
-        <div className="columns-2xs gap-8 space-y-8">
-          {posts.map((post, index: number) => (
-            <div
-              key={index}
-              className="group relative overflow-hidden rounded-lg border-2 border-zinc-400"
-            >
-              {post.type.includes('image') ? (
-                <Link href={`/photo/${post.id}`}>
-                  <Image
-                    width={1024}
-                    height={1024}
-                    alt={post.title}
-                    src={post.fileURL}
-                    className="aspect-auto w-full"
-                  />
-                </Link>
-              ) : (
-                <Link href={`/video/${post.id}`}>
+    <>
+      <div className="relative w-full">
+        <div
+          /* className="grid gap-4 py-6 sm:grid-cols-2 md:grid-cols-3" */ className="columns-2xs gap-4 space-y-4"
+        >
+          {posts.map((post, index) => {
+            return (
+              <div
+                key={index}
+                className="relative overflow-hidden rounded-lg bg-neutral-800 p-2"
+              >
+                {post.type.includes('video') ? (
                   <video
-                    key={index}
                     src={post.fileURL}
-                    controls={false}
-                    className="aspect-video w-full"
+                    className="h-60 rounded-lg object-cover"
                   />
+                ) : (
+                  <Image
+                    width={500}
+                    height={500}
+                    src={post.fileURL}
+                    className="h-60 rounded-lg object-cover sm:h-full"
+                    alt=""
+                  />
+                )}
 
-                  <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center rounded-lg bg-zinc-950/40 text-white transition-colors group-hover:bg-zinc-800/20 group-hover:text-zinc-100/40">
-                    <IoPlay className="text-7xl" />
+                <div className="mb-2 mt-4 flex items-center justify-between">
+                  <h3 className="">Vinicius</h3>
+
+                  <div className="flex items-center gap-2 text-xl">
+                    <IoEyeOutline />
+                    <IoHeartOutline />
                   </div>
-                </Link>
-              )}
-            </div>
-          ))}
+                </div>
+              </div>
+            )
+          })}
         </div>
-      ) : (
-        <div className="col-span-3 my-6 flex w-full flex-col justify-center">
-          <h2 className="mb-4 text-xl font-semibold">
-            Você ainda não possui nenhuma postagem 😥
-          </h2>
-        </div>
-      )}
-    </div>
+      </div>
+    </>
   )
 }

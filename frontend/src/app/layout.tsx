@@ -30,7 +30,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="">
-      <body className={`font-sans ${poppins.variable} ${lexendDeca.variable}`}>
+      <body
+        className={`bg-neutral-900 font-sans text-neutral-400 ${poppins.variable} ${lexendDeca.variable}`}
+      >
         <Providers>{children}</Providers>
         <ToastContainer position="bottom-right" />
       </body>

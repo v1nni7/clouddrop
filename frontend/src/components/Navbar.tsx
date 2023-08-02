@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import decoded from 'jwt-decode'
 import { cookies } from 'next/headers'
+import { IoSearchSharp } from 'react-icons/io5'
 
 type User = {
   username: string
@@ -15,21 +16,14 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="flex items-center justify-between border-b border-zinc-300 bg-zinc-200/50 p-6">
-      <h1 className="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text fill-transparent font-alt text-3xl font-extrabold text-transparent">
-        Cloud Drop
+    <nav className="flex items-center justify-between p-4">
+      <h1 className="bg-gradient-to-r from-indigo-400 to-indigo-500 bg-clip-text text-2xl font-bold text-transparent">
+        CloudDrop
       </h1>
 
-      <h2 className="w-[480px] text-center">
-        Olá <b>{user?.username}</b>, seja bem-vindo ao <b>Cloud Drop</b>!
-      </h2>
-
-      <Link
-        href="/profile"
-        className="flex h-12 items-center rounded-lg bg-blue-300/50 px-12 font-semibold shadow outline-none transition-all hover:bg-blue-400/50 focus:hover:bg-blue-400/50 active:shadow-none"
-      >
-        Meu Perfil
-      </Link>
+      <button className="rounded-full bg-neutral-800 p-2">
+        <IoSearchSharp className="text-2xl text-neutral-300" />
+      </button>
     </nav>
   )
 }
