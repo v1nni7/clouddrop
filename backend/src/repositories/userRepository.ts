@@ -8,7 +8,20 @@ function createUser(data: CreateUserParams) {
 }
 
 function findById(id: string) {
-  return prisma.user.findUnique({ where: { id } })
+  return prisma.user.findUnique({
+    where: { id },
+    select: {
+      name: true,
+      email: true,
+      username: true,
+      createdAt: true,
+      _count: {
+        select: {
+          posts: true,
+        },
+      },
+    },
+  })
 }
 
 function findByEmail(email: string) {
