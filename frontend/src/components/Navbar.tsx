@@ -4,6 +4,7 @@ import {
   IoFolderOutline,
   IoHomeOutline,
   IoPersonOutline,
+  IoSettingsOutline,
 } from 'react-icons/io5'
 import decoded from 'jwt-decode'
 import { cookies } from 'next/headers'
@@ -24,7 +25,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed bottom-0 left-0 flex w-full justify-center p-2">
+      <nav className="fixed bottom-2 left-0 flex w-full justify-center p-2">
         <div className="h-16 w-full rounded-full bg-neutral-700 px-4 shadow shadow-neutral-700 sm:max-w-lg">
           <div className="grid h-full grid-cols-5 place-items-center text-2xl text-white">
             <NavLink pathname="/timeline">
@@ -37,10 +38,12 @@ export default function Navbar() {
               <IoAddOutline className="text-2xl" />
             </button>
 
-            <IoFolderOutline />
-
             <NavLink pathname={`/${user?.username}`}>
               <IoPersonOutline />
+            </NavLink>
+
+            <NavLink pathname="/settings">
+              <IoSettingsOutline />
             </NavLink>
           </div>
         </div>

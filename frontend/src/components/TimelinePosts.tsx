@@ -2,17 +2,17 @@
 
 import Image from 'next/image'
 import { AxiosError } from 'axios'
-import { useContext, useEffect } from 'react'
+import { useCallback, useContext, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { IoEyeOutline, IoHeartOutline } from 'react-icons/io5'
 
 import { getPostsRequest } from '@/services/post'
 import { PostsContext } from '@/context/PostsContext'
 
-export default function Posts() {
+export default function ProfilePosts() {
   const { posts, setPosts } = useContext(PostsContext)
 
-  const handleLoadingPosts = async () => {
+  const handleLoadingPosts = useCallback(async () => {
     try {
       const response = await getPostsRequest()
 
@@ -28,7 +28,7 @@ export default function Posts() {
 
       toast.error(`${error.message}`)
     }
-  }
+  }, [])
 
   useEffect(() => {
     handleLoadingPosts()
