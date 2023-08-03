@@ -23,8 +23,6 @@ export default function PostCard({ post }: PostCardProps) {
       )}
 
       <div className="mb-2 mt-4 flex items-center justify-between">
-        <h3 className="">Vinicius</h3>
-
         <div className="flex items-center gap-2 text-xl">
           <IoEyeOutline />
           <IoHeartOutline />

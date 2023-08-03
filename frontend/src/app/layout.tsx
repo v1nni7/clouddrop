@@ -4,7 +4,9 @@ import 'react-toastify/dist/ReactToastify.css'
 import type { Metadata } from 'next'
 import { Poppins, Lexend_Deca as LexendDeca } from 'next/font/google'
 import { ToastContainer } from 'react-toastify'
+
 import Providers from '@/Providers'
+import ModalCreatePost from '@/components/ModalCreatePost'
 
 const poppins = Poppins({
   weight: '400',
@@ -33,7 +35,10 @@ export default function RootLayout({
       <body
         className={`bg-neutral-900 font-sans text-neutral-400 ${poppins.variable} ${lexendDeca.variable}`}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <ModalCreatePost />
+        </Providers>
         <ToastContainer position="bottom-right" />
       </body>
     </html>

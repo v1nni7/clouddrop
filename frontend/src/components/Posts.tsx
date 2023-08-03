@@ -9,7 +9,7 @@ import { PostsContext } from '@/context/PostsContext'
 
 import PostCard from './PostCard'
 
-export default function ProfilePosts() {
+export default function Posts() {
   const { posts, setPosts } = useContext(PostsContext)
 
   const handleLoadingPosts = useCallback(async () => {
@@ -37,7 +37,7 @@ export default function ProfilePosts() {
   return (
     <>
       <div className="relative w-full">
-        <div className="columns-2xs gap-4 space-y-4 py-16">
+        <div className="columns-2xs gap-4 space-y-4 pb-24">
           {posts.map((post, index) => {
             return <PostCard post={post} key={index} />
           })}

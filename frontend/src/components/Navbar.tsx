@@ -1,8 +1,6 @@
 import {
-  IoAddOutline,
+  IoCloudUploadOutline,
   IoCompassOutline,
-  IoFolderOutline,
-  IoHomeOutline,
   IoPersonOutline,
   IoSettingsOutline,
 } from 'react-icons/io5'
@@ -10,6 +8,7 @@ import decoded from 'jwt-decode'
 import { cookies } from 'next/headers'
 
 import NavLink from './NavLink'
+import ModalOpenButton from './ModalOpenButton'
 
 type User = {
   username: string
@@ -28,15 +27,15 @@ export default function Navbar() {
       <nav className="fixed bottom-2 left-0 flex w-full justify-center p-2">
         <div className="h-16 w-full rounded-full bg-neutral-700 px-4 shadow shadow-neutral-700 sm:max-w-lg">
           <div className="grid h-full grid-cols-5 place-items-center text-2xl text-white">
-            <NavLink pathname="/timeline">
-              <IoHomeOutline />
+            <NavLink pathname="/uploads">
+              <IoCloudUploadOutline />
             </NavLink>
 
-            <IoCompassOutline />
+            <NavLink pathname="/explore">
+              <IoCompassOutline />
+            </NavLink>
 
-            <button className="-translate-y-5 rounded-full bg-indigo-500 p-4 shadow shadow-indigo-500 transition-colors hover:bg-indigo-600 hover:shadow-indigo-600">
-              <IoAddOutline className="text-2xl" />
-            </button>
+            <ModalOpenButton />
 
             <NavLink pathname={`/${user?.username}`}>
               <IoPersonOutline />

@@ -3,6 +3,7 @@
 import { ReactNode } from 'react'
 import PostsProvider from './context/PostsContext'
 import { UserProvider } from './context/UserContext'
+import { ModalCreateProvider } from './context/ModalCreateContext'
 
 type ProviderProps = {
   children: ReactNode
@@ -11,7 +12,9 @@ type ProviderProps = {
 export default function Providers({ children }: ProviderProps) {
   return (
     <UserProvider>
-      <PostsProvider>{children}</PostsProvider>
+      <PostsProvider>
+        <ModalCreateProvider>{children}</ModalCreateProvider>
+      </PostsProvider>
     </UserProvider>
   )
 }
