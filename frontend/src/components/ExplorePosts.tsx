@@ -1,22 +1,21 @@
 'use client'
 
+import Image from 'next/image'
 import { AxiosError } from 'axios'
-import { useCallback, useContext, useEffect } from 'react'
 import { toast } from 'react-toastify'
+import { useCallback, useEffect, useState } from 'react'
 
 import { getPublicPostsRequest } from '@/services/post'
-import { PostsContext } from '@/context/PostsContext'
-
-import PostCard from './PostCard'
+import { Post } from '@/context/PostsContext'
+import { Oval } from 'react-loader-spinner'
+import Loading from './Loading'
 
 export default function ExplorePosts() {
-  const { posts, setPosts } = useContext(PostsContext)
+  const [posts, setPosts] = useState<Post[] | null>(null)
 
   const handleLoadingPosts = useCallback(async () => {
     try {
       const response = await getPublicPostsRequest()
-
-      console.log(response)
 
       if (response.status !== 200) {
         throw new Error(response.data)
@@ -39,19 +38,39 @@ export default function ExplorePosts() {
   return (
     <>
       <div className="relative w-full">
-        <div className="grid grid-cols-3">
-          {posts.length !== 0 ? (
-            posts.map((post, index) => {
-              return <PostCard post={post} key={index} />
-            })
+        {posts ? (
+          posts.length !== 0 ? (
+            <div className="grid grid-cols-3 gap-2">
+              {posts.map((post, index) => (
+                <div className="h-full" key={index}>
+                  {post.type.includes('image') ? (
+                    <Image
+                      width={500}
+                      height={1000}
+                      src={post.fileURL}
+                      alt=""
+                      className="h-36 rounded-lg border border-neutral-700 object-cover sm:h-96"
+                    />
+                  ) : (
+                    <video
+                      controls={false}
+                      src={post.fileURL}
+                      className="object-cover"
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
           ) : (
             <div className="col-span-3 py-24">
               <h1 className="text-center text-2xl">
                 Não há posts para exibir 😥
               </h1>
             </div>
-          )}
-        </div>
+          )
+        ) : (
+          <Loading />
+        )}
       </div>
     </>
   )

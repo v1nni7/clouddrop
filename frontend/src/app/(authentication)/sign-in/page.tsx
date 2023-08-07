@@ -37,7 +37,7 @@ export default function SignIn() {
       })
 
       toast.success('Login efetuado com sucesso!')
-      router.push('/timeline')
+      router.push('/uploads')
     } catch (error: any) {
       if (error instanceof AxiosError) {
         return toast.error(`${error.response?.data}`)

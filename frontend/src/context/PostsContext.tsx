@@ -18,14 +18,14 @@ type ProviderProps = {
 }
 
 type ProviderValue = {
-  posts: Post[]
-  setPosts: Dispatch<SetStateAction<never[]>>
+  posts: Post[] | null
+  setPosts: Dispatch<SetStateAction<Post[] | null>>
 }
 
 export const PostsContext = createContext(null as unknown as ProviderValue)
 
 export default function PostsProvider({ children }: ProviderProps) {
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState<Post[] | null>(null)
 
   return (
     <PostsContext.Provider value={{ posts, setPosts }}>
