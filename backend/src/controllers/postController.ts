@@ -6,12 +6,28 @@ async function createPost(request: FastifyRequest, reply: FastifyReply) {
   try {
     const body = request.body as CreatePostParams
 
-    await postServices.createPost(body)
+    const createdPost = await postServices.createPost(body)
 
-    reply.code(201)
+    reply.code(201).send(createdPost)
   } catch (error: any) {
     if (error.message) {
       console.log(error)
+      reply.code(error.code).send(error.message)
+    }
+
+    reply.code(500).send('Internal server error')
+  }
+}
+
+async function getAllPublicPosts(request: FastifyRequest, reply: FastifyReply) {
+  try {
+    const { userId } = request.body as { userId: string }
+
+    const posts = await postServices.getPublicPosts(userId)
+
+    reply.code(200).send(posts)
+  } catch (error: any) {
+    if (error.message) {
       reply.code(error.code).send(error.message)
     }
 
@@ -53,6 +69,7 @@ async function getPostById(request: FastifyRequest, reply: FastifyReply) {
 
 export default {
   createPost,
+  getAllPublicPosts,
   getPostsByUserId,
   getPostById,
 }

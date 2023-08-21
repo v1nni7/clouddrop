@@ -2,11 +2,14 @@ import './globals.css'
 import 'react-toastify/dist/ReactToastify.css'
 
 import type { Metadata } from 'next'
-import { Poppins, Lexend_Deca as LexendDeca } from 'next/font/google'
+import {
+  Poppins,
+  Lexend_Deca as LexendDeca,
+  Press_Start_2P as PressStart2P,
+} from 'next/font/google'
 import { ToastContainer } from 'react-toastify'
 
 import Providers from '@/Providers'
-import ModalCreatePost from '@/components/ModalCreatePost'
 
 const poppins = Poppins({
   weight: '400',
@@ -18,6 +21,12 @@ const lexendDeca = LexendDeca({
   weight: '400',
   subsets: ['latin'],
   variable: '--font-lexend-deca',
+})
+
+const pressStart2P = PressStart2P({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-press-start-2p',
 })
 
 export const metadata: Metadata = {
@@ -33,12 +42,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="">
       <body
-        className={`bg-neutral-900 font-sans text-neutral-400 ${poppins.variable} ${lexendDeca.variable}`}
+        className={`bg-neutral-900 font-sans text-neutral-400 ${poppins.variable} ${pressStart2P.variable} ${lexendDeca.variable}`}
       >
-        <Providers>
-          {children}
-          <ModalCreatePost />
-        </Providers>
+        <Providers>{children}</Providers>
         <ToastContainer position="bottom-right" />
       </body>
     </html>

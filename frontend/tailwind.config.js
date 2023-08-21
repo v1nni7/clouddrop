@@ -45,6 +45,8 @@ module.exports = {
       fontFamily: {
         sans: 'var(--font-poppins)',
         alt: 'var(--font-lexend-deca)',
+        mokoto: ['Mokoto'],
+        pixelated: 'var(--font-press-start-2p)',
       },
       backgroundImage: {
         'hero-section': "url('../assets/images/top-view.jpg')",

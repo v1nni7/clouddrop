@@ -4,13 +4,25 @@ import { Post } from '@prisma/client'
 export type CreatePostParams = Omit<Post, 'id' | 'createdAt' | 'updatedAt'>
 
 function createPost(data: CreatePostParams) {
-  console.log(data)
-
   return prisma.post.create({ data })
 }
 
+function findAll(userId: string) {
+  return prisma.post.findMany({
+    where: {
+      isPublic: true,
+      userId: {
+        not: userId,
+      },
+    },
+  })
+}
+
 function findByUserId(userId: string) {
-  return prisma.post.findMany({ where: { userId } })
+  return prisma.post.findMany({
+    where: { userId },
+    orderBy: { createdAt: 'desc' },
+  })
 }
 
 function findByPostId(postId: string) {
@@ -19,6 +31,7 @@ function findByPostId(postId: string) {
 
 export default {
   createPost,
+  findAll,
   findByUserId,
   findByPostId,
 }

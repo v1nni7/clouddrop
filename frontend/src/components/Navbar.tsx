@@ -8,7 +8,7 @@ import decoded from 'jwt-decode'
 import { cookies } from 'next/headers'
 
 import NavLink from './NavLink'
-import ModalOpenButton from './ModalOpenButton'
+import ModalFormPost from './ModalFormPost'
 
 type User = {
   username: string
@@ -35,7 +35,7 @@ export default function Navbar() {
               <IoCompassOutline />
             </NavLink>
 
-            <ModalOpenButton />
+            <ModalFormPost />
 
             <NavLink pathname={`/${user?.username}`}>
               <IoPersonOutline />

@@ -7,7 +7,6 @@ import { useCallback, useEffect, useState } from 'react'
 
 import { getPublicPostsRequest } from '@/services/post'
 import { Post } from '@/context/PostsContext'
-import { Oval } from 'react-loader-spinner'
 import Loading from './Loading'
 
 export default function ExplorePosts() {

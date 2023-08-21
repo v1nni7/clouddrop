@@ -8,7 +8,13 @@ async function createPost(data: CreatePostParams) {
 
   await validateUploadExistsOrFail(fileURL)
 
-  await postRepository.createPost(data)
+  return await postRepository.createPost(data)
+}
+
+async function getPublicPosts(userId: string) {
+  const posts = await postRepository.findAll(userId)
+
+  return posts
 }
 
 async function getPostsByUserId(userId: string) {
@@ -48,6 +54,7 @@ async function validateUploadExistsOrFail(fileURL: string) {
 
 export default {
   createPost,
+  getPublicPosts,
   getPostsByUserId,
   getPostById,
 }
